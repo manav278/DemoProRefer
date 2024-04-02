@@ -18,7 +18,7 @@ const Signup = () => {
 
     try {
       await axios
-        .post("http://localhost:3003/signup", {
+        .post("https://prorefer-backend.onrender.com/signup", {
           personalemail,
           password,
         })

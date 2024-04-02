@@ -42,7 +42,7 @@ const CompanyDetailsForm = ({
     event.preventDefault();
     try {
       await axios
-        .post("http://localhost:3003/api/verifyOtpAtSignup", {
+        .post("https://prorefer-backend.onrender.com/api/verifyOtpAtSignup", {
           personalOtp,
           workOtp,
         })
@@ -108,7 +108,7 @@ const CompanyDetailsForm = ({
         let personalEmail = formData.personalemail;
         let workEmail = formData.workemail;
         let result = await axios.post(
-          "http://localhost:3003/api/checkEmailExistence",
+          "https://prorefer-backend.onrender.com/api/checkEmailExistence",
           { personalEmail, workEmail }
         );
         if (result.data === "Personal email exists") {
@@ -164,7 +164,7 @@ const CompanyDetailsForm = ({
           );
         } else {
           await axios
-            .post("http://localhost:3003/api/requestOtpAtSignup", {
+            .post("https://prorefer-backend.onrender.com/api/requestOtpAtSignup", {
               personalEmail,
               workEmail,
             })
@@ -206,7 +206,7 @@ const CompanyDetailsForm = ({
 
   const apiCall = async () => {
     try {
-      await axios.get("http://localhost:3003/api/getCompany").then((res) => {
+      await axios.get("https://prorefer-backend.onrender.com/api/getCompany").then((res) => {
         if (res.data.message === "Server Error") {
           toast.error("Server Error", {
             position: "top-center",

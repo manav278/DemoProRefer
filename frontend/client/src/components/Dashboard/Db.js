@@ -10,7 +10,7 @@ const Db = () => {
   const [selectedFile, setSelectedFile] = useState(null);
 
   const handleReqRefClick = async () => {
-    let result = await axios.get("http://localhost:3003/api/resumeUploaded");
+    let result = await axios.get("https://prorefer-backend.onrender.com/api/resumeUploaded");
     if (result.data === 0) {
       navigate("/requestreferral");
     } else {
@@ -32,7 +32,7 @@ const Db = () => {
   };
   const viewResume = async () => {
     try {
-      const response = await axios.get("http://localhost:3003/api/getPdf", {
+      const response = await axios.get("https://prorefer-backend.onrender.com/api/getPdf", {
         responseType: "blob", // Use blob responseType to handle binary data
       });
 
@@ -62,7 +62,7 @@ const Db = () => {
 
       try {
         const response = await axios.post(
-          "http://localhost:3003/api/upload",
+          "https://prorefer-backend.onrender.com/api/upload",
           formData,
           {
             headers: {

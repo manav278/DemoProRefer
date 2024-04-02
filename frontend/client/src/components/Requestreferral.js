@@ -17,7 +17,7 @@ export default function Requestreferral() {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const apiCall = async () => {
     try {
-      await axios.get("http://localhost:3003/api/getCompany").then((res) => {
+      await axios.get("https://prorefer-backend.onrender.com/api/getCompany").then((res) => {
         // console.log(res.data);
         if (res.data.message === "Server Error") {
           toast.error("Server Error", {
@@ -61,7 +61,7 @@ export default function Requestreferral() {
     } else {
       try {
         response = await axios
-          .post("http://localhost:3003/api/requestref", {
+          .post("https://prorefer-backend.onrender.com/api/requestref", {
             position,
             selectedCompany,
             country,
@@ -109,7 +109,7 @@ export default function Requestreferral() {
                 progress: undefined,
                 theme: "light",
                 onClose: () => {
-                  axios.get("http://localhost:3003/api/process-request");
+                  axios.get("https://prorefer-backend.onrender.com/api/process-request");
                   navigate("/dashboard");
                 },
               });

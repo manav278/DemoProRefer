@@ -14,7 +14,7 @@ const Received = () => {
     setLoading(true);
     try {
       const response = await axios.get(
-        `http://localhost:3003/api/accept1/${Referral_ID}`
+        `https://prorefer-backend.onrender.com/api/accept1/${Referral_ID}`
       );
       if (response.data.message === "Added") {
         setLoading(false);
@@ -28,7 +28,7 @@ const Received = () => {
           progress: undefined,
           theme: "light",
           onClose: () => {
-            axios.get("http://localhost:3003/api/accept2");
+            axios.get("https://prorefer-backend.onrender.com/api/accept2");
             navigate("/dashboard");
             window.location.reload();
           },
@@ -43,7 +43,7 @@ const Received = () => {
     setLoadingReject(true);
     try {
       const response = await axios.get(
-        `http://localhost:3003/api/reject1/${Referral_ID}`
+        `https://prorefer-backend.onrender.com/api/reject1/${Referral_ID}`
       );
       if (response.data === 0) {
         setLoadingReject(false);
@@ -57,7 +57,7 @@ const Received = () => {
           progress: undefined,
           theme: "light",
           onClose: () => {
-            axios.get("http://localhost:3003/api/reject2");
+            axios.get("https://prorefer-backend.onrender.com/api/reject2");
             navigate("/dashboard");
             window.location.reload();
           },
@@ -72,7 +72,7 @@ const Received = () => {
   const [id, setId] = useState(null);
   useEffect(() => {
     axios
-      .get("http://localhost:3003/api/getreceiveemployeeid")
+      .get("https://prorefer-backend.onrender.com/api/getreceiveemployeeid")
       .then((response) => {
         setId(response.data.id);
       })
@@ -85,7 +85,7 @@ const Received = () => {
   const viewResume = async (applicantId) => {
     try {
       const response = await axios.get(
-        `http://localhost:3003/api/getApplicantPdf/${applicantId}`,
+        `https://prorefer-backend.onrender.com/api/getApplicantPdf/${applicantId}`,
         {
           responseType: "blob", // Use blob responseType to handle binary data
         }
@@ -116,7 +116,7 @@ const Received = () => {
   const fetchCurrentData = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3003/api/currentreceive"
+        "https://prorefer-backend.onrender.com/api/currentreceive"
       );
       // console.log(response);
       const formattedData = response.data.map((obj) => {
@@ -139,7 +139,7 @@ const Received = () => {
   const [pastRequest, setPastRequest] = useState([]);
   const fetchPastData = async () => {
     try {
-      const response = await axios.get("http://localhost:3003/api/pastreceive");
+      const response = await axios.get("https://prorefer-backend.onrender.com/api/pastreceive");
       console.log(response);
       const formattedData = response.data.map((obj) => {
         return {

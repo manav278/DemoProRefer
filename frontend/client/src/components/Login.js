@@ -24,7 +24,7 @@ export default function Login({ setLoggedIn }) {
 
     try {
       response = await axios
-        .post("http://localhost:3003/api/login", {
+        .post("https://prorefer-backend.onrender.com/api/login", {
           email,
           password,
         })

@@ -31,7 +31,7 @@ const Company = () => {
 
   const apiCall = async () => {
     try {
-      await axios.get("http://localhost:3003/api/getCompany").then((res) => {
+      await axios.get("https://prorefer-backend.onrender.com/api/getCompany").then((res) => {
         setCompanyList(res.data);
         setStoredData(res.data);
         setLoading(false);

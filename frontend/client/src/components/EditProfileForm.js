@@ -34,7 +34,7 @@ const EditProfileForm = () => {
   const getDetails = async () => {
     try {
       await axios
-        .post("http://localhost:3003/api/getEditProfileDetails")
+        .post("https://prorefer-backend.onrender.com/api/getEditProfileDetails")
         .then((res) => {
           res.data.Mobile_Number && setMobileNumber(res.data.Mobile_Number);
           res.data.Personal_Email && setPersonalEmail(res.data.Personal_Email);
@@ -72,7 +72,7 @@ const EditProfileForm = () => {
     event.preventDefault();
     try {
       await axios
-        .post("http://localhost:3003/api/requestOtp", {
+        .post("https://prorefer-backend.onrender.com/api/requestOtp", {
           personalEmail,
           isPersonalEmailChanged,
         })
@@ -122,7 +122,7 @@ const EditProfileForm = () => {
     event.preventDefault();
     try {
       await axios
-        .post("http://localhost:3003/api/verifyOtp", { otp })
+        .post("https://prorefer-backend.onrender.com/api/verifyOtp", { otp })
         .then((res) => {
           if (res.data.message === "Otp verified") {
             toast.success("OTP verified successfully", {
@@ -179,7 +179,7 @@ const EditProfileForm = () => {
       }
       if (mobileNumber && personalEmail && location) {
         await axios
-          .post("http://localhost:3003/api/updateApplicant", {
+          .post("https://prorefer-backend.onrender.com/api/updateApplicant", {
             mobileNumber,
             personalEmail,
             location,

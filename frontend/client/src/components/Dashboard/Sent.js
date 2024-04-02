@@ -5,7 +5,7 @@ import axios from "axios";
 const Sent = () => {
   const viewResume = async () => {
     try {
-      const response = await axios.get("http://localhost:3003/api/getPdf", {
+      const response = await axios.get("https://prorefer-backend.onrender.com/api/getPdf", {
         responseType: "blob", // Use blob responseType to handle binary data
       });
 
@@ -46,7 +46,7 @@ const Sent = () => {
   const [currentRequest, setCurrentRequest] = useState([]);
   const fetchCurrentSent = async () => {
     try {
-      const response = await axios.get("http://localhost:3003/api/currentsent");
+      const response = await axios.get("https://prorefer-backend.onrender.com/api/currentsent");
       console.log(response);
       const formattedData = response.data.map((obj) => {
         return {
@@ -69,7 +69,7 @@ const Sent = () => {
   const [pastRequest, setPastRequest] = useState([]);
   const fetchHistoricalSent = async () => {
     try {
-      const response = await axios.get("http://localhost:3003/api/historysent");
+      const response = await axios.get("https://prorefer-backend.onrender.com/api/historysent");
       const formattedData = response.data.map((obj) => {
         return {
           ...obj,

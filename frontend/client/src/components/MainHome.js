@@ -14,7 +14,7 @@ const MainHome = () => {
   useEffect(()=>{
     setTimeout(()=>{
       setIsloading(false);
-    },12000)
+    },1200)
   },[])
   return (
     <div>

@@ -24,7 +24,7 @@ function App() {
       const token = localStorage.getItem("token");
       if (token) {
         axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-        const response = await axios.get("http://localhost:3003/api/verify");
+        const response = await axios.get("https://prorefer-backend.onrender.com/api/verify");
         // console.log(response);
         if (response.status === 200) {
           setLoggedIn(true);
