@@ -1,5 +1,6 @@
 // SignUpForm.js
-
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import React, { useState } from "react";
 import PersonalDetailsForm from "./PersonalDetailsForm";
 import CompanyDetailsForm from "./CompanyDetailsForm";
@@ -185,6 +186,7 @@ const SignupForm = () => {
           updateFormData={updateFormData}
         />
       )}
+      <ToastContainer />
     </div>
   );
 };
