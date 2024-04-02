@@ -17,23 +17,25 @@ export default function Requestreferral() {
   const [selectedCompany, setSelectedCompany] = useState(null);
   const apiCall = async () => {
     try {
-      await axios.get("https://prorefer-backend.onrender.com/api/getCompany").then((res) => {
-        // console.log(res.data);
-        if (res.data.message === "Server Error") {
-          toast.error("Server Error", {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-        setCompanyList(res.data);
-        setLoading(false);
-      });
+      await axios
+        .get("https://prorefer-backend.onrender.com/api/getCompany")
+        .then((res) => {
+          // console.log(res.data);
+          if (res.data.message === "Server Error") {
+            toast.error("Server Error", {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+          setCompanyList(res.data);
+          setLoading(false);
+        });
     } catch (e) {
       console.log("Error occured: ", e);
     }
@@ -47,8 +49,8 @@ export default function Requestreferral() {
   async function submit(e) {
     e.preventDefault();
     let response = null;
-    if (selectedCompany == null) {
-      toast.warn("Please select company.", {
+    if (selectedCompany == 0 || position == "" || country == "" || url == "") {
+      toast.warn("One or more fields are empty", {
         position: "top-center",
         autoClose: 1500,
         hideProgressBar: false,
@@ -109,7 +111,9 @@ export default function Requestreferral() {
                 progress: undefined,
                 theme: "light",
                 onClose: () => {
-                  axios.get("https://prorefer-backend.onrender.com/api/process-request");
+                  axios.get(
+                    "https://prorefer-backend.onrender.com/api/process-request"
+                  );
                   navigate("/dashboard");
                 },
               });

@@ -30,7 +30,7 @@ const MainHome = () => {
           </div>
           <div class="container text-center text-light">
             <div class="row g-2 ">
-              <div class="col-12 col-md-6 order-md-first order-2 ">
+              <div class="col-12 col-lg-6 order-lg-first order-2 ">
                 <div
                   class="home-div"
                   style={{ height: "45vh", textAlign: "center" }}
@@ -45,19 +45,19 @@ const MainHome = () => {
                   </p>
                 </div>
               </div>
-              <div class="col-12 col-md-6 order-md-2 order-first">
+              <div class="col-12 col-lg-6 order-lg-2 order-first">
                 <div class="">
                   <img src={Hom1} alt="1-ProRefer" width="62.4%" height="48%" />
                   {/* 520:406 */}
                 </div>
               </div>
-              <div class="col-12 col-md-6 order-md-3 order-3">
+              <div class="col-12 col-lg-6 order-lg-3 order-3">
                 <div class="">
                   <img src={Hom2} alt="1-ProRefer" width="54%" height="48%" />
                   {/* 530:471 */}
                 </div>
               </div>
-              <div class="col-12 col-md-6 order-md-4 order-4">
+              <div class="col-12 col-lg-6 order-lg-4 order-4">
                 <div
                   class=" home-div"
                   style={{ height: "45vh", textAlign: "center" }}
@@ -73,7 +73,7 @@ const MainHome = () => {
                   </p>
                 </div>
               </div>
-              <div class="col-12 col-md-6 order-md-5 order-last">
+              <div class="col-12 col-lg-6 order-lg-5 order-last">
                 <div
                   class="home-div"
                   style={{ height: "45vh", textAlign: "center" }}
@@ -89,7 +89,7 @@ const MainHome = () => {
                   </p>
                 </div>
               </div>
-              <div class="col-12 col-md-6 order-md-last order-5">
+              <div class="col-12 col-lg-6 order-lg-last order-5">
                 <div class="">
                   <img src={Hom3} alt="1-ProRefer" width="59%" height="48%" />
                   {/* 390:317 */}

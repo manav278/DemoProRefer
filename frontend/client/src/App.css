@@ -135,3 +135,13 @@ body {
   background-color: #118a7e;
   color: white;
 }
+
+.navbar-toggler:focus {
+  outline: none; /* Remove focus outline */
+  box-shadow: none; /* Remove box-shadow on focus */
+}
+
+.navbar-toggler:active,
+.navbar-toggler.active {
+  background-color: transparent !important; /* Remove background color on click/active state */
+}

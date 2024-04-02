@@ -12,9 +12,11 @@ function MainNav() {
 
   const location = useLocation();
   const [activeLink, setActiveLink] = useState(location.pathname);
+  const [expanded, setExpanded] = useState(false);
 
   const handleLinkClick = (link) => {
     setActiveLink(link);
+    setExpanded(!expanded);
   };
 
   function NavLink({ to, label, activeLink, onClick }) {
@@ -39,6 +41,7 @@ function MainNav() {
         data-bs-theme="dark"
         className="main-nav"
         style={{ fontSize: "larger" }}
+        // expanded={expanded}
       >
         <Container>
           <Navbar.Brand href="/">
