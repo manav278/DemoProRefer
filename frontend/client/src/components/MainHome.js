@@ -10,6 +10,7 @@ import Loader from "./Loader";
 import "../App.css";
 const MainHome = () => {
   const [counterOn, setCounterOn] = useState(false);
+  const [isShown, setIsShown] = useState(false);
   const [isLoading, setIsloading] = useState(true);
   useEffect(() => {
     setTimeout(() => {
@@ -97,95 +98,153 @@ const MainHome = () => {
               </div>
             </div>
           </div>
-          <div className="container">
-            <ScrollTrigger
-              onEnter={() => setCounterOn(true)}
-              onExit={() => setCounterOn(false)}
-            >
-              <div
-                className="container"
-                style={{ marginBottom: "-2%", height: "12em" }}
+          {isShown ? (
+            <div className="container">
+                <div
+                  className="container"
+                  style={{ marginBottom: "-2%", height: "12em" }}
+                >
+                  <div className="row gx-md-3 gx-1">
+                    <div className="col-4">
+                      <div
+                        className="home-numbers"
+                        style={{
+                          display: "grid",
+                          placeContent: "center",
+                          height: "170%",
+                        }}
+                      >
+                        <h2 className="text-primary">
+                          10000+
+                        </h2>
+                        <p className="text-light">Referrals</p>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div
+                        className="home-numbers"
+                        style={{
+                          display: "grid",
+                          placeContent: "center",
+                          height: "170%",
+                        }}
+                      >
+                        <h2 className="text-primary">
+                          500+
+                        </h2>
+                        <p className="text-light">Companies</p>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div
+                        className="home-numbers"
+                        style={{
+                          display: "grid",
+                          placeContent: "center",
+                          height: "170%",
+                        }}
+                      >
+                        <div>
+                          <h2 className="text-primary">
+                            5000+
+                          </h2>
+                          <p className="text-light">Employees</p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+            </div>
+          ) : (
+            <div className="container">
+              <ScrollTrigger
+                onEnter={() => setCounterOn(true)}
+                onExit={() => {
+                  setCounterOn(false);
+                  setIsShown(true);
+                }}
               >
                 <div
-                  className="row gx-3"
-                  style={{ height: "9vh" }}
-                  // style={{ marginBottom: "-2%",height:"1rem" }}
+                  className="container"
+                  style={{ marginBottom: "-2%", height: "12em" }}
                 >
-                  <div className="col-4">
-                    <div
-                      className="home-numbers"
-                      style={{
-                        display: "grid",
-                        placeContent: "center",
-                        height: "200%",
-                      }}
-                    >
-                      <h2 className="text-primary">
-                        {counterOn && (
-                          <CountUp
-                            start={0}
-                            end={10000}
-                            duration={1.5}
-                            delay={0}
-                          />
-                        )}
-                        +
-                      </h2>
-                      <p className="text-light">Referrals</p>
-                    </div>
-                  </div>
-                  <div className="col-4">
-                    <div
-                      className="home-numbers"
-                      style={{
-                        display: "grid",
-                        placeContent: "center",
-                        height: "200%",
-                      }}
-                    >
-                      <h2 className="text-primary">
-                        {counterOn && (
-                          <CountUp
-                            start={0}
-                            end={500}
-                            duration={1.5}
-                            delay={0}
-                          />
-                        )}
-                        +
-                      </h2>
-                      <p className="text-light">Companies</p>
-                    </div>
-                  </div>
-                  <div className="col-4">
-                    <div
-                      className="home-numbers"
-                      style={{
-                        display: "grid",
-                        placeContent: "center",
-                        height: "200%",
-                      }}
-                    >
-                      <div>
+                  <div className="row gx-md-3 gx-1">
+                    <div className="col-4">
+                      <div
+                        className="home-numbers"
+                        style={{
+                          display: "grid",
+                          placeContent: "center",
+                          height: "170%",
+                        }}
+                      >
                         <h2 className="text-primary">
                           {counterOn && (
                             <CountUp
                               start={0}
-                              end={5000}
+                              end={10000}
                               duration={1.5}
                               delay={0}
                             />
                           )}
                           +
                         </h2>
-                        <p className="text-light">Employees</p>
+                        <p className="text-light">Referrals</p>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div
+                        className="home-numbers"
+                        style={{
+                          display: "grid",
+                          placeContent: "center",
+                          height: "170%",
+                        }}
+                      >
+                        <h2 className="text-primary">
+                          {counterOn && (
+                            <CountUp
+                              start={0}
+                              end={500}
+                              duration={1.5}
+                              delay={0}
+                            />
+                          )}
+                          +
+                        </h2>
+                        <p className="text-light">Companies</p>
+                      </div>
+                    </div>
+                    <div className="col-4">
+                      <div
+                        className="home-numbers"
+                        style={{
+                          display: "grid",
+                          placeContent: "center",
+                          height: "170%",
+                        }}
+                      >
+                        <div>
+                          <h2 className="text-primary">
+                            {counterOn && (
+                              <CountUp
+                                start={0}
+                                end={5000}
+                                duration={1.5}
+                                delay={0}
+                              />
+                            )}
+                            +
+                          </h2>
+                          <p className="text-light">Employees</p>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </ScrollTrigger>
-          </div>
+              </ScrollTrigger>
+            </div>
+          )}
           <Footer></Footer>
         </>
       )}
