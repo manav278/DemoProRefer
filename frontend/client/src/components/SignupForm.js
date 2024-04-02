@@ -49,17 +49,20 @@ const SignupForm = () => {
         formData.password !== "" &&
         ((formData.workemail === "" &&
           formData.companyname === "" &&
-          (formData.selectedcompany === null || formData.selectedcompany==="Other") &&
+          (formData.selectedcompany === null ||
+            formData.selectedcompany === "Other") &&
           formData.location === "" &&
           formData.position === "") ||
           (formData.workemail !== "" &&
             formData.companyname !== "" &&
-            (formData.selectedcompany == null || formData.selectedcompany==="Other") &&
+            (formData.selectedcompany == null ||
+              formData.selectedcompany === "Other") &&
             formData.location !== "" &&
             formData.position !== "") ||
           (formData.workemail !== "" &&
             formData.companyname === "" &&
-            (formData.selectedcompany !== null || formData.selectedcompany==="Other") &&
+            (formData.selectedcompany !== null ||
+              formData.selectedcompany === "Other") &&
             formData.location !== "" &&
             formData.position !== ""))
       ) {
@@ -68,88 +71,95 @@ const SignupForm = () => {
           formData
         );
         if (response.data.message === "Personal Email Already Exists.") {
-          toast.error(
-            "Personal Email Already Exists.",
-            {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            }
-          );
+          toast.error("Personal Email Already Exists.", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else if (
           response.data.message ===
           "Personal Email and Company Email Already Exists."
         ) {
-          toast.error(
-            "Personal Email and Company Email Already Exists.",
-            {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            }
-          );
-        } else if (response.data.message === "Company Email Already Exists.") {
-          toast.error(
-            "Company Email Already Exists.",
-            {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            }
-          );
-        } else if (
-          response.data === 0
-        ) {
-          toast.error(
-            "Signup Successful!",
-            {
-              position: "top-center",
-              autoClose: 3000,
-              hideProgressBar: false,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              theme: "light",
-            }
-          );
-          setFormData({
-            firstname: "",
-            lastname: "",
-            personalemail: "",
-            mobilenumber: "",
-            password: "",
-            workemail: "",
-            companyname: "",
-            selectedcompany: "",
-            location: "",
-            position: "",
+          toast.error("Personal Email and Company Email Already Exists.", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
           });
-          navigate("/login");
+        } else if (response.data.message === "Company Email Already Exists.") {
+          toast.error("Company Email Already Exists.", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
+        } else if (response.data === 0) {
+          toast.success("Signup Successful!", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            onClose: () => {
+              setFormData({
+                firstname: "",
+                lastname: "",
+                personalemail: "",
+                mobilenumber: "",
+                password: "",
+                workemail: "",
+                companyname: "",
+                selectedcompany: "",
+                location: "",
+                position: "",
+              });
+              navigate("/login");
+            },
+          });
         }
       } else {
-        alert(
-          "One or more fields are empty in Personal Details Section or Company Details Section"
+        toast.error(
+          "One or more fields are empty in Personal Details Section or Company Details Section",
+          {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          }
         );
       }
     } catch (error) {
       console.error("Error signing up:", error);
-      alert("Error signing up. Please try again.");
+      toast.error("Error signing up. Please try again.", {
+        position: "top-center",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
 
