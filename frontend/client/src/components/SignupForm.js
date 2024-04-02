@@ -17,7 +17,7 @@ const SignupForm = () => {
     password: "",
     workemail: "",
     companyname: "",
-    selectedcompany: "",
+    selectedcompany: null,
     location: "",
     position: "",
   });
@@ -49,17 +49,17 @@ const SignupForm = () => {
         formData.password !== "" &&
         ((formData.workemail === "" &&
           formData.companyname === "" &&
-          formData.selectedcompany === null &&
+          (formData.selectedcompany === null || formData.selectedcompany==="Other") &&
           formData.location === "" &&
           formData.position === "") ||
           (formData.workemail !== "" &&
             formData.companyname !== "" &&
-            formData.selectedcompany == null &&
+            (formData.selectedcompany == null || formData.selectedcompany==="Other") &&
             formData.location !== "" &&
             formData.position !== "") ||
           (formData.workemail !== "" &&
             formData.companyname === "" &&
-            formData.selectedcompany !== null &&
+            (formData.selectedcompany !== null || formData.selectedcompany==="Other") &&
             formData.location !== "" &&
             formData.position !== ""))
       ) {
@@ -68,16 +68,66 @@ const SignupForm = () => {
           formData
         );
         if (response.data.message === "Personal Email Already Exists.") {
-          alert("Personal Email Already Exists.");
+          toast.error(
+            "Personal Email Already Exists.",
+            {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
         } else if (
           response.data.message ===
           "Personal Email and Company Email Already Exists."
         ) {
-          alert("Personal Email and Company Email Already Exists.");
-        } else if (response.data.message==="Company Email Already Exists.") {
-          alert("Company Email Already Exists.");
-        } else {
-          alert("Signup Successful!");
+          toast.error(
+            "Personal Email and Company Email Already Exists.",
+            {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+        } else if (response.data.message === "Company Email Already Exists.") {
+          toast.error(
+            "Company Email Already Exists.",
+            {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
+        } else if (
+          response.data === 0
+        ) {
+          toast.error(
+            "Signup Successful!",
+            {
+              position: "top-center",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            }
+          );
           setFormData({
             firstname: "",
             lastname: "",

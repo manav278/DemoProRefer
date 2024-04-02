@@ -20,7 +20,7 @@ async function hashPassword(password) {
 
 router.post("/signup", async (req, res) => {
   const userData = req.body;
-  if (userData.selectedcompany === null && userData.companyname !== "") {
+  if ((userData.selectedcompany === "Other" || userData.selectedcompany === null) && userData.companyname !== "") {
     const u1 = await user.findOne({ Personal_Email: userData.personalemail });
     const u2 = await user.findOne({ Work_Email: userData.workemail });
     if (u1 && u2) {
@@ -80,7 +80,6 @@ router.post("/signup", async (req, res) => {
         newComp
           .save()
           .then(async () => {
-            // console.log("Saved successfully in companydata.");
           })
           .catch((err) => {
             console.error(
@@ -91,23 +90,21 @@ router.post("/signup", async (req, res) => {
         newUser
           .save()
           .then(async () => {
-            // console.log("Saved successfully in currentrequest.");
           })
           .catch((err) => {
             console.error(
-              "Error saving user in currentrequest DataBase :",
+              "Error saving user in currentrequest DataBase1 :",
               err
             );
           });
         newAuth
           .save()
           .then(async () => {
-            // console.log("Saved successfully in authdata.");
           })
           .catch((err) => {
             console.error("Error saving user in authdata DataBase :", err);
           });
-        res.status(200).json({ message: "Suceesfully Added in all Schemas." });
+        res.status(200).json(0);
       } catch (e) {
         res.status(200).json({ message: "Error Adding in all Schemas." });
       }
@@ -115,9 +112,7 @@ router.post("/signup", async (req, res) => {
   } else if (userData.selectedcompany !== null && userData.companyname === "") {
     const u1 = await user.findOne({ Personal_Email: userData.personalemail });
     const u2 = await user.findOne({ Work_Email: userData.workemail });
-    // console.log(u1, u2);
     if (u1 && u2) {
-      // console.log("1");
       try {
         res.status(200).json({
           message: "Personal Email and Company Email Already Exists.",
@@ -127,7 +122,6 @@ router.post("/signup", async (req, res) => {
         res.status(200).json({ error: "Internal Server Error" });
       }
     } else if (u1) {
-      // console.log("2");
       try {
         res.status(200).json({ message: "Personal Email Already Exists." });
       } catch (error) {
@@ -135,7 +129,6 @@ router.post("/signup", async (req, res) => {
         res.status(200).json({ error: "Internal Server Error" });
       }
     } else if (u2) {
-      // console.log("3");
       try {
         res.status(200).json({ message: "Company Email Already Exists." });
       } catch (error) {
@@ -143,7 +136,6 @@ router.post("/signup", async (req, res) => {
         res.status(200).json({ error: "Internal Server Error" });
       }
     } else {
-      // console.log("4");
       const userLength = await user.countDocuments();
       const encryptedPassword = await hashPassword(userData.password);
       const newUser = new user({
@@ -171,7 +163,6 @@ router.post("/signup", async (req, res) => {
         newAuth
           .save()
           .then(async () => {
-            // console.log("Saved successfully in authdata.");
           })
           .catch((err) => {
             console.error("Error saving user in authdata DataBase :", err);
@@ -179,20 +170,19 @@ router.post("/signup", async (req, res) => {
         newUser
           .save()
           .then(async () => {
-            // console.log("Saved successfully in currentrequest.");
           })
           .catch((err) => {
             console.error(
-              "Error saving user in currentrequest DataBase :",
+              "Error saving user in currentrequest DataBase2 :",
               err
             );
           });
-        res.status(200).json({ message: "Suceesfully Added in all Schemas." });
+        res.status(200).json(0);
       } catch (e) {
         res.status(200).json({ message: "Error Adding in all Schemas." });
       }
     }
-  } else if (userData.selectedcompany === null && userData.companyname === "") {
+  } else if ((userData.selectedcompany === null || userData.selectedcompany==="Other") && userData.companyname === "") {
     const u1 = await user.findOne({ Personal_Email: userData.personalemail });
     // const u2 = await user.findOne({ Work_Email: userData.workemail });
     if (u1) {
@@ -230,7 +220,6 @@ router.post("/signup", async (req, res) => {
         newAuth
           .save()
           .then(async () => {
-            // console.log("Saved successfully in authdata.");
           })
           .catch((err) => {
             console.error("Error saving user in authdata DataBase :", err);
@@ -238,15 +227,14 @@ router.post("/signup", async (req, res) => {
         newUser
           .save()
           .then(async () => {
-            // console.log("Saved successfully in currentrequest.");
           })
           .catch((err) => {
             console.error(
-              "Error saving user in currentrequest DataBase :",
+              "Error saving user in currentrequest DataBase3 :",
               err
             );
           });
-        res.status(200).json({ message: "Suceesfully Added in all Schemas." });
+        res.status(200).json(0);
       } catch (e) {
         res.status(200).json({ message: "Error Adding in all Schemas." });
       }
@@ -351,7 +339,6 @@ router.post("/requestOtpAtSignup", async (req, res) => {
       let { encryptedWorkOTP, workSalt } = await sendWorkOTPByEmail(workEmail);
       globalWorkEncryptedOTP = encryptedWorkOTP;
       globalWorkSalt = workSalt;
-      // console.log(globalWorkSalt);
     }
     res.json({ message: "Otp sent" });
   } catch (error) {
@@ -382,7 +369,6 @@ router.post("/verifyOtpAtSignup", async (req, res) => {
 
 router.post("/checkEmailExistence", async (req, res) => {
   try {
-    console.log("manav");
     const { personalEmail, workEmail } = req.body;
     let personalEmailUser = await user.findOne({
       Personal_Email: personalEmail,
@@ -390,7 +376,6 @@ router.post("/checkEmailExistence", async (req, res) => {
     let workEmailUser = await user.findOne({
       Work_Email: { $ne: "", $eq: workEmail },
     });
-    console.log(workEmailUser);
     if (personalEmailUser && workEmailUser) {
       res.json("Both email exists");
     } else if (personalEmailUser) {

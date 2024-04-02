@@ -13,7 +13,6 @@ const CompanyDetailsForm = ({
   handleSubmit,
   updateFormData,
 }) => {
-  // console.log(formData);
   const navigate = useNavigate();
   const [filterCompanies, setFilterCompanies] = useState("");
   const [globalCompanies, setGlobalCompanies] = useState([]);
@@ -90,17 +89,17 @@ const CompanyDetailsForm = ({
       formData.password !== "" &&
       ((formData.workemail === "" &&
         formData.companyname === "" &&
-        formData.selectedcompany === null &&
+        (formData.selectedcompany === null || formData.selectedcompany==="Other") &&
         formData.location === "" &&
         formData.position === "") ||
         (formData.workemail !== "" &&
           formData.companyname !== "" &&
-          formData.selectedcompany == null &&
+          (formData.selectedcompany == null || formData.selectedcompany==="Other") &&
           formData.location !== "" &&
           formData.position !== "") ||
         (formData.workemail !== "" &&
           formData.companyname === "" &&
-          formData.selectedcompany !== null &&
+          (formData.selectedcompany !== null || formData.selectedcompany==="Other") &&
           formData.location !== "" &&
           formData.position !== ""))
     ) {
@@ -164,10 +163,13 @@ const CompanyDetailsForm = ({
           );
         } else {
           await axios
-            .post("https://prorefer-backend.onrender.com/api/requestOtpAtSignup", {
-              personalEmail,
-              workEmail,
-            })
+            .post(
+              "https://prorefer-backend.onrender.com/api/requestOtpAtSignup",
+              {
+                personalEmail,
+                workEmail,
+              }
+            )
             .then((res) => {
               if (res.data.message === "Otp sent") {
                 setGetOtpButtonClicked(true);
@@ -206,23 +208,25 @@ const CompanyDetailsForm = ({
 
   const apiCall = async () => {
     try {
-      await axios.get("https://prorefer-backend.onrender.com/api/getCompany").then((res) => {
-        if (res.data.message === "Server Error") {
-          toast.error("Server Error", {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-        setCompanyList(res.data);
-        setGlobalCompanies(res.data);
-        setLoading(false);
-      });
+      await axios
+        .get("https://prorefer-backend.onrender.com/api/getCompany")
+        .then((res) => {
+          if (res.data.message === "Server Error") {
+            toast.error("Server Error", {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+          setCompanyList(res.data);
+          setGlobalCompanies(res.data);
+          setLoading(false);
+        });
     } catch (e) {
       console.log("Error occured: ", e);
     }
@@ -245,7 +249,7 @@ const CompanyDetailsForm = ({
   // -------------------------------------
   const handleSelect = (event) => {
     setSelectedCompany(event.target.value);
-    if (event.target.value != "") {
+    if (event.target.value != "Other") {
       let cName = globalCompanies[Number(event.target.value) - 1].company;
       toast.info(`${cName} selected`, {
         position: "bottom-center",
@@ -257,18 +261,20 @@ const CompanyDetailsForm = ({
         progress: undefined,
         theme: "light",
       });
-    }
-    else{
-      toast.info(`Other option selected, you may enter company name in the below text field`, {
-        position: "bottom-center",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        theme: "light",
-      });
+    } else {
+      toast.info(
+        `Other option selected, you may enter company name in the below text field`,
+        {
+          position: "bottom-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        }
+      );
     }
   };
   // -------------------------------------
@@ -312,7 +318,7 @@ const CompanyDetailsForm = ({
                 </div>
               </div>
               <div className="col-12">
-                <form onSubmit={handleSubmit}>
+                <form>
                   <div className="mb-3">
                     <label
                       for="workemail"
@@ -349,7 +355,7 @@ const CompanyDetailsForm = ({
                               fontWeight: "lighter",
                               borderRadius: "5px",
                               padding: "3px",
-                              paddingRight: '15%'
+                              paddingRight: "15%",
                             }}
                             size="5"
                           >
@@ -361,7 +367,7 @@ const CompanyDetailsForm = ({
                                 }
                               </option>
                             )} */}
-                            <option value="">Other</option>
+                            <option value={null}>Other</option>
                             {companyList
                               ? companyList.map((value) => (
                                   <option key={value.id} value={value.id}>
@@ -388,7 +394,7 @@ const CompanyDetailsForm = ({
                               className="col-12 text-center"
                               style={{ marginTop: "3%" }}
                             >
-                              {selectedCompany &&
+                              {(selectedCompany!="Other" && selectedCompany) &&
                                 globalCompanies[Number(selectedCompany)] && (
                                   <div>
                                     <p className="p-0 m-0">Selected Company</p>
@@ -407,7 +413,7 @@ const CompanyDetailsForm = ({
                       </div>
                     )}
                   </div>
-                  {selectedCompany === null || selectedCompany === "" ? (
+                  {selectedCompany === null || selectedCompany === "" || selectedCompany==="Other" ? (
                     <div className="mb-3">
                       <label
                         for="companyname"
@@ -565,7 +571,7 @@ const CompanyDetailsForm = ({
                           marginBottom: "2%",
                           marginTop: "2%",
                         }}
-                        type="submit"
+                        onClick={handleSubmit}
                       >
                         Sign Up
                       </button>
