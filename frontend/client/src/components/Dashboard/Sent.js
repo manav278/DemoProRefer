@@ -194,7 +194,7 @@ const Sent = () => {
                       <div className="row">
                         {/* ---------------------------------------------- */}
 
-                        <div className="col-4">
+                        <div className="col-md-4 mb-1 mb-md-0">
                           <div style={{ margin: "2%" }}>
                             <b style={{ color: "yellowgreen" }}>
                               Referral ID:{" "}
@@ -211,7 +211,7 @@ const Sent = () => {
 
                         {/* ---------------------------------------------- */}
 
-                        <div className="col-4">
+                        <div className="col-md-4 mb-md-0">
                           <div style={{ marginBottom: "2%" }}>
                             {ob.Company_Name}
                           </div>
@@ -220,7 +220,7 @@ const Sent = () => {
 
                         {/* ---------------------------------------------- */}
 
-                        <div className="col-4">
+                        <div className="col-md-4 mb-md-0">
                           <button
                             className={`text-light ${
                               ob.result === "Not Referred"

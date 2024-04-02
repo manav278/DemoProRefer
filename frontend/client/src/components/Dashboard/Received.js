@@ -346,7 +346,7 @@ const Received = () => {
                       <div className="row">
                         {/* ---------------------------------------------- */}
 
-                        <div className="col-4">
+                        <div className="col-md-4 mb-1 mb-md-0">
                           <div style={{ margin: "2%" }}>
                             <b style={{ color: "yellowgreen" }}>
                               Referral ID:{" "}
@@ -368,14 +368,14 @@ const Received = () => {
 
                         {/* ---------------------------------------------- */}
 
-                        <div className="col-4">
+                        <div className="col-md-4 mb-md-0">
                           <div style={{ margin: "2%" }}>{ob.Company_Name}</div>
                           <div>{ob.Position}</div>
                         </div>
 
                         {/* ---------------------------------------------- */}
 
-                        <div className="col-4">
+                        <div className="col-md-4 mb-md-0">
                           <button
                             className={`text-light ${
                               (id &&
