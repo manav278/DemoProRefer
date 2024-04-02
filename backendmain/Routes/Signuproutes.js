@@ -342,7 +342,9 @@ router.post("/requestOtpAtSignup", async (req, res) => {
   try {
     const { personalEmail, workEmail } = req.body;
 
-    let { encryptedPersonalOTP, perSalt } = await sendPersonalOTPByEmail(personalEmail);
+    let { encryptedPersonalOTP, perSalt } = await sendPersonalOTPByEmail(
+      personalEmail
+    );
     globalPersonalEncryptedOTP = encryptedPersonalOTP;
     globalPersonalSalt = perSalt;
     if (workEmail) {
@@ -369,10 +371,8 @@ router.post("/verifyOtpAtSignup", async (req, res) => {
       const isWorkCorrect = verifyWorkOTP(globalWorkEncryptedOTP, workOtp);
       if (isPersonalCorrect && isWorkCorrect)
         res.json({ message: "Otp verified" });
-      else
-        res.json({message: "Otp incorrect"});
-    }
-    else if (isPersonalCorrect) res.json({ message: "Otp verified" });
+      else res.json({ message: "Otp incorrect" });
+    } else if (isPersonalCorrect) res.json({ message: "Otp verified" });
     else res.json({ message: "Otp incorrect" });
   } catch (error) {
     console.log("Error: ", error);
@@ -382,22 +382,22 @@ router.post("/verifyOtpAtSignup", async (req, res) => {
 
 router.post("/checkEmailExistence", async (req, res) => {
   try {
-    const {personalEmail, workEmail} = req.body;
-    let personalEmailUser = await user.findOne({Personal_Email: personalEmail});
-    let workEmailUser = await user.findOne({Work_Email: workEmail});
-    if(personalEmailUser && workEmailUser)
-    {
+    console.log("manav");
+    const { personalEmail, workEmail } = req.body;
+    let personalEmailUser = await user.findOne({
+      Personal_Email: personalEmail,
+    });
+    let workEmailUser = await user.findOne({
+      Work_Email: { $ne: "", $eq: workEmail },
+    });
+    console.log(workEmailUser);
+    if (personalEmailUser && workEmailUser) {
       res.json("Both email exists");
-    }
-    else if(personalEmailUser)
-    {
+    } else if (personalEmailUser) {
       res.json("Personal email exists");
-    }
-    else if(workEmailUser)
-    {
+    } else if (workEmailUser) {
       res.json("Work email exists");
-    }
-    else{
+    } else {
       res.json(0);
     }
   } catch (error) {
