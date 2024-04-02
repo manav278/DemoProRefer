@@ -371,7 +371,7 @@ const CompanyDetailsForm = ({
                               : "None"}
                           </select>
                         </div>
-                        <div className="col-6">
+                        <div className="col-md-6 col-12">
                           <div className="row">
                             <div className="col-12">
                               <input
@@ -430,7 +430,7 @@ const CompanyDetailsForm = ({
                   <div className="mb-3">
                     <label
                       for="position"
-                      style={{ marginTop: "0.5%" }}
+                      // style={{ marginTop: "0.5%" }}
                       className="form-label font-family-label"
                     >
                       Company Position

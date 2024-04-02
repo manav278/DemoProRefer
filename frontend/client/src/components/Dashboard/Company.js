@@ -31,23 +31,25 @@ const Company = () => {
 
   const apiCall = async () => {
     try {
-      await axios.get("https://prorefer-backend.onrender.com/api/getCompany").then((res) => {
-        setCompanyList(res.data);
-        setStoredData(res.data);
-        setLoading(false);
-        if (res.data.message === "Server Error") {
-          toast.error("Server Error", {
-            position: "top-center",
-            autoClose: 1500,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-          });
-        }
-      });
+      await axios
+        .get("https://prorefer-backend.onrender.com/api/getCompany")
+        .then((res) => {
+          setCompanyList(res.data);
+          setStoredData(res.data);
+          setLoading(false);
+          if (res.data.message === "Server Error") {
+            toast.error("Server Error", {
+              position: "top-center",
+              autoClose: 1500,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "light",
+            });
+          }
+        });
     } catch (e) {
       console.log("Error occured: ", e);
     }
@@ -58,41 +60,54 @@ const Company = () => {
 
   return (
     <div>
-      <input
-        className="p-2 mt-2 mb-4"
-        style={{ color: "black", border: "none", borderRadius: "5px" }}
-        type="text"
-        id="search"
-        placeholder="Search company"
-        onChange={handleSearchChange}
-      />
+      <div>
+        <input
+          className="mt-2 mb-4 text-center col-8 col-md-6"
+          style={{
+            color: "black",
+            border: "none",
+            borderRadius: "3%",
+            height: "2.5em",
+            // width: "15%",
+          }}
+          type="text"
+          id="search"
+          placeholder="Search company"
+          onChange={handleSearchChange}
+        />
+      </div>
       <div className="container">
         <div className="row">
           {loading ? (
             <p>Loading</p>
           ) : (
-            <div style={{display:"grid",placeContent:"center",}}>
-            <div
-              className="scrollable-list"
-              style={{overflowY: "scroll",width:"50vw",placeItems:"center",maxHeight:"28.2em"}}
-            >
-              <ul className="list-group">
-                {companyList
-                  ? companyList.map((value, index) => (
-                      <li
-                        key={index}
-                        className={`list-group-item ${
-                          index % 2 === 0
-                            ? "bg-dark-blue text-light"
-                            : "bg-light-blue text-light"
-                        }`}
-                      >
-                        {value.company}
-                      </li>
-                    ))
-                  : "None"}
-              </ul>
-            </div>
+            <div style={{ display: "grid", placeContent: "center" }}>
+              <div
+                className="scrollable-list"
+                style={{
+                  overflowY: "scroll",
+                  width: "50vw",
+                  placeItems: "center",
+                  maxHeight: "28.2em",
+                }}
+              >
+                <ul className="list-group">
+                  {companyList
+                    ? companyList.map((value, index) => (
+                        <li
+                          key={index}
+                          className={`list-group-item ${
+                            index % 2 === 0
+                              ? "bg-dark-blue text-light"
+                              : "bg-light-blue text-light"
+                          }`}
+                        >
+                          {value.company}
+                        </li>
+                      ))
+                    : "None"}
+                </ul>
+              </div>
             </div>
           )}
         </div>
