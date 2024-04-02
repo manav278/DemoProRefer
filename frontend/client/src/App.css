@@ -58,8 +58,6 @@ body {
 }
 
 .home-numbers {
-  display: grid;
-  place-content: center;
   background-color: #172b3d;
 }
 

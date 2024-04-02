@@ -11,11 +11,11 @@ import "../App.css";
 const MainHome = () => {
   const [counterOn, setCounterOn] = useState(false);
   const [isLoading, setIsloading] = useState(true);
-  useEffect(()=>{
-    setTimeout(()=>{
+  useEffect(() => {
+    setTimeout(() => {
       setIsloading(false);
-    },1200)
-  },[])
+    }, 1200);
+  }, []);
   return (
     <div>
       {isLoading ? (
@@ -97,42 +97,95 @@ const MainHome = () => {
               </div>
             </div>
           </div>
-          <ScrollTrigger
-            onEnter={() => setCounterOn(true)}
-            onExit={() => setCounterOn(false)}
-          >
-            <div className="container" style={{ marginBottom: "-2%" }}>
-              <div className="row justify-content-around" style={{ height: "25vh", width: "100%" }}>
-                <div className="col-4 home-numbers" style={{borderRight: "2px solid white"}}>
-                  <h2 className="text-primary">
-                    {counterOn && (
-                      <CountUp start={0} end={10000} duration={1.5} delay={0} />
-                    )}
-                    +
-                  </h2>
-                  <p className="text-light">Referrals</p>
-                </div>
-                <div className="col-4 home-numbers" style={{borderRight: "2px solid white"}}>
-                  <h2 className="text-primary">
-                    {counterOn && (
-                      <CountUp start={0} end={500} duration={1.5} delay={0} />
-                    )}
-                    +
-                  </h2>
-                  <p className="text-light">Companies</p>
-                </div>
-                <div className="col-4 home-numbers">
-                  <h2 className="text-primary">
-                    {counterOn && (
-                      <CountUp start={0} end={5000} duration={1.5} delay={0} />
-                    )}
-                    +
-                  </h2>
-                  <p className="text-light">Employees</p>
+          <div className="container">
+            <ScrollTrigger
+              onEnter={() => setCounterOn(true)}
+              onExit={() => setCounterOn(false)}
+            >
+              <div
+                className="container"
+                style={{ marginBottom: "-2%", height: "12em" }}
+              >
+                <div
+                  className="row gx-3"
+                  style={{ height: "9vh" }}
+                  // style={{ marginBottom: "-2%",height:"1rem" }}
+                >
+                  <div className="col-4">
+                    <div
+                      className="home-numbers"
+                      style={{
+                        display: "grid",
+                        placeContent: "center",
+                        height: "200%",
+                      }}
+                    >
+                      <h2 className="text-primary">
+                        {counterOn && (
+                          <CountUp
+                            start={0}
+                            end={10000}
+                            duration={1.5}
+                            delay={0}
+                          />
+                        )}
+                        +
+                      </h2>
+                      <p className="text-light">Referrals</p>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div
+                      className="home-numbers"
+                      style={{
+                        display: "grid",
+                        placeContent: "center",
+                        height: "200%",
+                      }}
+                    >
+                      <h2 className="text-primary">
+                        {counterOn && (
+                          <CountUp
+                            start={0}
+                            end={500}
+                            duration={1.5}
+                            delay={0}
+                          />
+                        )}
+                        +
+                      </h2>
+                      <p className="text-light">Companies</p>
+                    </div>
+                  </div>
+                  <div className="col-4">
+                    <div
+                      className="home-numbers"
+                      style={{
+                        display: "grid",
+                        placeContent: "center",
+                        height: "200%",
+                      }}
+                    >
+                      <div>
+                        <h2 className="text-primary">
+                          {counterOn && (
+                            <CountUp
+                              start={0}
+                              end={5000}
+                              duration={1.5}
+                              delay={0}
+                            />
+                          )}
+                          +
+                        </h2>
+                        <p className="text-light">Employees</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </ScrollTrigger>
+            </ScrollTrigger>
+          </div>
           <Footer></Footer>
         </>
       )}
