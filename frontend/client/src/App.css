@@ -1,0 +1,137 @@
+body {
+  background-color: black;
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+.dash {
+  background-color: rgb(0, 0, 0);
+  height: auto;
+}
+
+.dashinner2 {
+  font-size: small;
+  /* height: auto; */
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  /* margin-bottom: 15px; */
+}
+
+.table1 {
+  text-align: left;
+}
+
+.table1 button {
+  border-radius: 5px;
+}
+
+.navbut button {
+  /* background-color: #6c757d; */
+  background-color: #232931;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+}
+
+.scrollable-list {
+  max-height: 280px; /* You can adjust the height as per your requirement */
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+.bg-light-blue {
+  background-color: #172b3d;
+  color: #fff;
+}
+
+.bg-dark-blue {
+  background-color: #060606;
+  color: #fff;
+}
+
+.home-div {
+  display: grid;
+  place-content: center;
+}
+
+.home-numbers {
+  display: grid;
+  place-content: center;
+  background-color: #172b3d;
+}
+
+.bg-color-feedbackform {
+  /* background: linear-gradient(45deg, #a8c2ed, #d7f9f8); */
+  background-color: #232931;
+}
+
+.feedback-placeholder::placeholder {
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: lighter;
+}
+.feedback-placeholder {
+  background-color: rgb(0, 0, 0);
+}
+
+.btn-feedback-form {
+  border: none;
+  color: white;
+}
+
+.merriweather-regular {
+  font-family: "Merriweather", serif;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.lato-thin {
+  font-family: "Lato", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.roboto-thin {
+  font-family: "Roboto", sans-serif;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.createcampaign-placeholder::placeholder {
+  color: #888;
+  font-weight: lighter;
+}
+.bg-login-container {
+  background: linear-gradient(45deg, #a8c2ed, #d7f9f8);
+}
+
+.btn-createcampaign-form {
+  border: none;
+  color: white;
+}
+
+.main-nav.active-link {
+  /* background-color: #007bff; */
+  color: #007bff;
+}
+
+/* .link-no-underline:hover {
+  color:black;
+  background-color: #172b3d;
+} */
+.play-btn {
+  background-color: #4ecca3;
+  color: black;
+  border-radius: 4px;
+  padding: 1%;
+  font-size: 110%;
+  cursor: pointer;
+  border: none;
+}
+
+.play-btn:hover {
+  background-color: #118a7e;
+  color: white;
+}
