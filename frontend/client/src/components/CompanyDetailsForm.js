@@ -41,7 +41,7 @@ const CompanyDetailsForm = ({
     event.preventDefault();
     try {
       await axios
-        .post("http://localhost:3003/api/verifyOtpAtSignup", {
+        .post("https://prorefer-backend.onrender.com/api/verifyOtpAtSignup", {
           personalOtp,
           workOtp,
         })
@@ -164,7 +164,7 @@ const CompanyDetailsForm = ({
         } else {
           await axios
             .post(
-              "http://localhost:3003/api/requestOtpAtSignup",
+              "https://prorefer-backend.onrender.com/api/requestOtpAtSignup",
               {
                 personalEmail,
                 workEmail,
