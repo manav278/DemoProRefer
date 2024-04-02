@@ -20,7 +20,11 @@ async function hashPassword(password) {
 
 router.post("/signup", async (req, res) => {
   const userData = req.body;
-  if ((userData.selectedcompany === "Other" || userData.selectedcompany === null) && userData.companyname !== "") {
+  if (
+    (userData.selectedcompany === "Other" ||
+      userData.selectedcompany === null) &&
+    userData.companyname !== ""
+  ) {
     const u1 = await user.findOne({ Personal_Email: userData.personalemail });
     const u2 = await user.findOne({ Work_Email: userData.workemail });
     if (u1 && u2) {
@@ -79,8 +83,7 @@ router.post("/signup", async (req, res) => {
       try {
         newComp
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error(
               "Error saving company in companydata DataBase :",
@@ -89,8 +92,7 @@ router.post("/signup", async (req, res) => {
           });
         newUser
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error(
               "Error saving user in currentrequest DataBase1 :",
@@ -99,8 +101,7 @@ router.post("/signup", async (req, res) => {
           });
         newAuth
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error("Error saving user in authdata DataBase :", err);
           });
@@ -162,15 +163,13 @@ router.post("/signup", async (req, res) => {
       try {
         newAuth
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error("Error saving user in authdata DataBase :", err);
           });
         newUser
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error(
               "Error saving user in currentrequest DataBase2 :",
@@ -182,7 +181,11 @@ router.post("/signup", async (req, res) => {
         res.status(200).json({ message: "Error Adding in all Schemas." });
       }
     }
-  } else if ((userData.selectedcompany === null || userData.selectedcompany==="Other") && userData.companyname === "") {
+  } else if (
+    (userData.selectedcompany === null ||
+      userData.selectedcompany === "Other") &&
+    userData.companyname === ""
+  ) {
     const u1 = await user.findOne({ Personal_Email: userData.personalemail });
     // const u2 = await user.findOne({ Work_Email: userData.workemail });
     if (u1) {
@@ -219,15 +222,13 @@ router.post("/signup", async (req, res) => {
       try {
         newAuth
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error("Error saving user in authdata DataBase :", err);
           });
         newUser
           .save()
-          .then(async () => {
-          })
+          .then(async () => {})
           .catch((err) => {
             console.error(
               "Error saving user in currentrequest DataBase3 :",
@@ -329,16 +330,23 @@ const verifyWorkOTP = (encryptedOTP, enteredOTP) => {
 router.post("/requestOtpAtSignup", async (req, res) => {
   try {
     const { personalEmail, workEmail } = req.body;
-
+    console.log("personal: ", personalEmail, ", work: ", workEmail);
     let { encryptedPersonalOTP, perSalt } = await sendPersonalOTPByEmail(
       personalEmail
     );
     globalPersonalEncryptedOTP = encryptedPersonalOTP;
     globalPersonalSalt = perSalt;
+    console.log(
+      "Personal -> ",
+      globalPersonalEncryptedOTP,
+      " ",
+      globalPersonalSalt
+    );
     if (workEmail) {
       let { encryptedWorkOTP, workSalt } = await sendWorkOTPByEmail(workEmail);
       globalWorkEncryptedOTP = encryptedWorkOTP;
       globalWorkSalt = workSalt;
+      console.log("Work -> ", globalWorkEncryptedOTP, " ", globalWorkSalt);
     }
     res.json({ message: "Otp sent" });
   } catch (error) {
@@ -354,13 +362,17 @@ router.post("/verifyOtpAtSignup", async (req, res) => {
       globalPersonalEncryptedOTP,
       personalOtp
     );
+    console.log(isPersonalCorrect);
     if (globalWorkEncryptedOTP && globalWorkSalt) {
       const isWorkCorrect = verifyWorkOTP(globalWorkEncryptedOTP, workOtp);
+      console.log(isWorkCorrect);
       if (isPersonalCorrect && isWorkCorrect)
         res.json({ message: "Otp verified" });
       else res.json({ message: "Otp incorrect" });
-    } else if (isPersonalCorrect) res.json({ message: "Otp verified" });
-    else res.json({ message: "Otp incorrect" });
+    } else if (isPersonalCorrect) {
+      console.log("Namaste");
+      res.json({ message: "Otp verified" });
+    } else res.json({ message: "Otp incorrect" });
   } catch (error) {
     console.log("Error: ", error);
     res.json({ message: "Error trying to verify OTP" });

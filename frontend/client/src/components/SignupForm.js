@@ -74,7 +74,7 @@ const SignupForm = () => {
         if (response.data.message === "Personal Email Already Exists.") {
           toast.error("Personal Email Already Exists.", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -88,7 +88,7 @@ const SignupForm = () => {
         ) {
           toast.error("Personal Email and Company Email Already Exists.", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -99,7 +99,7 @@ const SignupForm = () => {
         } else if (response.data.message === "Company Email Already Exists.") {
           toast.error("Company Email Already Exists.", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 2000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -110,7 +110,7 @@ const SignupForm = () => {
         } else if (response.data === 0) {
           toast.success("Signup Successful!", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 1200,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
@@ -153,7 +153,7 @@ const SignupForm = () => {
       console.error("Error signing up:", error);
       toast.error("Error signing up. Please try again.", {
         position: "top-center",
-        autoClose: 3000,
+        autoClose: 2000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
